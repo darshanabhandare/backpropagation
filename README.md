@@ -25,36 +25,41 @@ E2 = 1/2 * (t2-a_o2)^2**
 and total error 
 **E_Total = E1 + E2**
 
-**Backpropagation is to identify the rate of change in the error 
-**below is how we derive the effect of each weight on the total error
+**Backpropagation is to identify the rate of change in the error**
+Below is how we derive the effect of each weight on the total error
 
-∂E1/∂a_h1 = ∂E1/∂a_o1 * ∂a_o1/∂o1*∂o1/∂w5*∂w5/∂a_h1
-a_o1-t1 * a_o1*(1-a_o1)* w5
+*  ∂E1/∂a_h1 = ∂E1/∂a_o1 * ∂a_o1/∂o1*∂o1/∂w5*∂w5/∂a_h1
+*  a_o1-t1 * a_o1*(1-a_o1)* w5
 
-∂E2/∂a_h1 = a_o2-t2 * a_o2*(1-a_o2)  * w7
+* ∂E2/∂a_h1 = a_o2-t2 * a_o2*(1-a_o2)  * w7
+**so we get formula for total error**
+* ∂E_total/∂a_h1 =∂E1/∂a_h1 +∂E2/∂a_h1
+* ∂E_total/∂a_h1 = a_o1-t1 * a_o1*(1-a_o1)* w5 + a_o2-t2 * a_o2*(1-a_o2)  * w7
+* ∂E_total/∂a_h2 = a_o1-t1 * a_o1*(1-a_o1)* w6 + a_o2-t2 * a_o2*(1-a_o2)  * w8
 
-∂E_total/∂a_h1 =∂E1/∂a_h1 +∂E2/∂a_h1
-∂E_total/∂a_h1 = a_o1-t1 * a_o1*(1-a_o1)* w5 + a_o2-t2 * a_o2*(1-a_o2)  * w7
-∂E_total/∂a_h2 = a_o1-t1 * a_o1*(1-a_o1)* w6 + a_o2-t2 * a_o2*(1-a_o2)  * w8
+* ∂E_Total/∂w5 = ∂(E1+E2)/∂w5
+* **w5 has no effect on E2 since it is out of the path**
+* ∂E_Total/∂w5 = ∂(E1)/∂w5
+* 
+**Split the derivatives**
+* ∂E_Total/∂w5 = ∂(E1)/∂w5 =  ∂E1/a_o1 * ∂a_o1/∂o1 * ∂o1/∂w5
+* ∂E1/a_o1 =  ∂(1/2 * (t1-a_o1)^2)/∂a_o1 = a_o1-t1
+* ∂a_o1/∂o1 = ∂( σ(o1))/∂o1 = σ(o1) * (1 - σ(o1)) = a_o1 * ( 1 - a_o1)
+* ∂o1/∂w5 = ∂(a_h1*w5 + a_h2*w6)/∂w5 = a_h1
+* 
+**which will give us the rate of change of Error w.r.t weights as below**
+* ∂E_total/∂w1 =∂E_total/∂a_h1 * ∂a_h1/∂h1 * ∂h1/∂w1 
+* ∂E_total/∂w2 =∂E_total/∂a_h1 * ∂a_h1/∂h1 * ∂h1/∂w2
+* ∂E_total/∂w3 =∂E_total/∂a_h2 * ∂a_h2/∂h2 * ∂h2/∂w3
+* ∂E_total/∂w4 =∂E_total/∂a_h2 * ∂a_h2/∂h2 * ∂h2/∂w4
 
-∂E_Total/∂w5 = ∂(E1+E2)/∂w5
-∂E_Total/∂w5 = ∂(E1)/∂w5
-Split the derivatives 
-∂E_Total/∂w5 = ∂(E1)/∂w5 =  ∂E1/a_o1 * ∂a_o1/∂o1 * ∂o1/∂w5
-∂E1/a_o1 =  ∂(1/2 * (t1-a_o1)^2)/∂a_o1 = a_o1-t1
-∂a_o1/∂o1 = ∂( σ(o1))/∂o1 = σ(o1) * (1 - σ(o1)) = a_o1 * ( 1 - a_o1)
-∂o1/∂w5 = ∂(a_h1*w5 + a_h2*w6)/∂w5 = a_h1
+**Finally the rate of change of Error_total w.r.t all Weights comes to**
 
-∂E_total/∂w1 =∂E_total/∂a_h1 * ∂a_h1/∂h1 * ∂h1/∂w1 
-∂E_total/∂w2 =∂E_total/∂a_h1 * ∂a_h1/∂h1 * ∂h1/∂w2
-∂E_total/∂w3 =∂E_total/∂a_h2 * ∂a_h2/∂h2 * ∂h2/∂w3
-∂E_total/∂w4 =∂E_total/∂a_h2 * ∂a_h2/∂h2 * ∂h2/∂w4
-
-∂E_total/∂w1 =(a_o1-t1 * a_o1*(1-a_o1)* w5 + a_o2-t2 * a_o2*(1-a_o2)  * w7)* ∂a_h1/∂h1 * ∂h1/∂w1 
-∂E_total/∂w1 =(a_o1-t1 * a_o1*(1-a_o1)* w5 + a_o2-t2 * a_o2*(1-a_o2)  * w7)* a_h1(1-a_h1) * i1
-∂E_total/∂w2 =(a_o1-t1 * a_o1*(1-a_o1)* w5 + a_o2-t2 * a_o2*(1-a_o2)  * w7)* a_h1(1-a_h1) * i2
-∂E_total/∂w3 =(a_o1-t1 * a_o1*(1-a_o1)* w6 + a_o2-t2 * a_o2*(1-a_o2)  * w8)* a_h2(1-a_h2) * i1
-∂E_total/∂w4 =(a_o1-t1 * a_o1*(1-a_o1)* w6 + a_o2-t2 * a_o2*(1-a_o2)  * w8)* a_h2(1-a_h2) * i2
+* ∂E_total/∂w1 =(a_o1-t1 * a_o1*(1-a_o1)* w5 + a_o2-t2 * a_o2*(1-a_o2)  * w7)* ∂a_h1/∂h1 * ∂h1/∂w1 
+* ∂E_total/∂w1 =(a_o1-t1 * a_o1*(1-a_o1)* w5 + a_o2-t2 * a_o2*(1-a_o2)  * w7)* a_h1(1-a_h1) * i1
+* ∂E_total/∂w2 =(a_o1-t1 * a_o1*(1-a_o1)* w5 + a_o2-t2 * a_o2*(1-a_o2)  * w7)* a_h1(1-a_h1) * i2
+* ∂E_total/∂w3 =(a_o1-t1 * a_o1*(1-a_o1)* w6 + a_o2-t2 * a_o2*(1-a_o2)  * w8)* a_h2(1-a_h2) * i1
+* ∂E_total/∂w4 =(a_o1-t1 * a_o1*(1-a_o1)* w6 + a_o2-t2 * a_o2*(1-a_o2)  * w8)* a_h2(1-a_h2) * i2
 
 ∂E_Total/∂w5 = a_o1-t1 * a_o1*(1-a_o1) * a_h1
 ∂E_Total/∂w6 = a_o1-t1 * a_o1*(1-a_o1) * a_h2
