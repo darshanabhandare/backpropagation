@@ -79,7 +79,7 @@ LR = 0.1
 ![image](https://github.com/darshanabhandare/backpropagation/assets/73514918/66b8776d-db55-4a5b-a73e-2807b7123764)
 
 LR = 0.2
-0.5![image](https://github.com/darshanabhandare/backpropagation/assets/73514918/f00124c8-6ffc-4c58-8e61-bbb455846535)
+![image](https://github.com/darshanabhandare/backpropagation/assets/73514918/f00124c8-6ffc-4c58-8e61-bbb455846535)
 
 LR = 0.5
 ![image](https://github.com/darshanabhandare/backpropagation/assets/73514918/a2af76f4-3bb1-4b43-9a7c-b15ed2bb8704)
