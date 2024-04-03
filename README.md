@@ -14,3 +14,49 @@ Creates neural network by referring to the classroom Excel.
 5. Apply weights w5 and w6 to get output from first layer o1 and o2
 6. **o1=a_h1*w5 +a_h2*w6**
 7. **o2=a_h1*w7+a_h2*w8**
+
+Repeat for the next layer and get 
+**a_o1=σ(o1)
+a_o2=σ(o2)**
+
+we consider 
+**E1 = 1/2 * (t1-a_o1)^2
+E2 = 1/2 * (t2-a_o2)^2**
+and total error 
+**E_Total = E1 + E2**
+
+**Backpropagation is to identify the rate of change in the error 
+**below is how we derive the effect of each weight on the total error
+
+∂E1/∂a_h1 = ∂E1/∂a_o1 * ∂a_o1/∂o1*∂o1/∂w5*∂w5/∂a_h1
+a_o1-t1 * a_o1*(1-a_o1)* w5
+
+∂E2/∂a_h1 = a_o2-t2 * a_o2*(1-a_o2)  * w7
+
+∂E_total/∂a_h1 =∂E1/∂a_h1 +∂E2/∂a_h1
+∂E_total/∂a_h1 = a_o1-t1 * a_o1*(1-a_o1)* w5 + a_o2-t2 * a_o2*(1-a_o2)  * w7
+∂E_total/∂a_h2 = a_o1-t1 * a_o1*(1-a_o1)* w6 + a_o2-t2 * a_o2*(1-a_o2)  * w8
+
+∂E_Total/∂w5 = ∂(E1+E2)/∂w5
+∂E_Total/∂w5 = ∂(E1)/∂w5
+Split the derivatives 
+∂E_Total/∂w5 = ∂(E1)/∂w5 =  ∂E1/a_o1 * ∂a_o1/∂o1 * ∂o1/∂w5
+∂E1/a_o1 =  ∂(1/2 * (t1-a_o1)^2)/∂a_o1 = a_o1-t1
+∂a_o1/∂o1 = ∂( σ(o1))/∂o1 = σ(o1) * (1 - σ(o1)) = a_o1 * ( 1 - a_o1)
+∂o1/∂w5 = ∂(a_h1*w5 + a_h2*w6)/∂w5 = a_h1
+
+∂E_total/∂w1 =∂E_total/∂a_h1 * ∂a_h1/∂h1 * ∂h1/∂w1 
+∂E_total/∂w2 =∂E_total/∂a_h1 * ∂a_h1/∂h1 * ∂h1/∂w2
+∂E_total/∂w3 =∂E_total/∂a_h2 * ∂a_h2/∂h2 * ∂h2/∂w3
+∂E_total/∂w4 =∂E_total/∂a_h2 * ∂a_h2/∂h2 * ∂h2/∂w4
+
+∂E_total/∂w1 =(a_o1-t1 * a_o1*(1-a_o1)* w5 + a_o2-t2 * a_o2*(1-a_o2)  * w7)* ∂a_h1/∂h1 * ∂h1/∂w1 
+∂E_total/∂w1 =(a_o1-t1 * a_o1*(1-a_o1)* w5 + a_o2-t2 * a_o2*(1-a_o2)  * w7)* a_h1(1-a_h1) * i1
+∂E_total/∂w2 =(a_o1-t1 * a_o1*(1-a_o1)* w5 + a_o2-t2 * a_o2*(1-a_o2)  * w7)* a_h1(1-a_h1) * i2
+∂E_total/∂w3 =(a_o1-t1 * a_o1*(1-a_o1)* w6 + a_o2-t2 * a_o2*(1-a_o2)  * w8)* a_h2(1-a_h2) * i1
+∂E_total/∂w4 =(a_o1-t1 * a_o1*(1-a_o1)* w6 + a_o2-t2 * a_o2*(1-a_o2)  * w8)* a_h2(1-a_h2) * i2
+
+∂E_Total/∂w5 = a_o1-t1 * a_o1*(1-a_o1) * a_h1
+∂E_Total/∂w6 = a_o1-t1 * a_o1*(1-a_o1) * a_h2
+∂E_Total/∂w7 = a_o2-t2 * a_o2*(1-a_o2) * a_h1
+∂E_Total/∂w8 = a_o2-t2 * a_o2*(1-a_o2) * a_h2
