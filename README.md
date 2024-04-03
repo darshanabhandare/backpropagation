@@ -61,7 +61,14 @@ Below is how we derive the effect of each weight on the total error
 * ∂E_total/∂w3 =(a_o1-t1 * a_o1*(1-a_o1)* w6 + a_o2-t2 * a_o2*(1-a_o2)  * w8)* a_h2(1-a_h2) * i1
 * ∂E_total/∂w4 =(a_o1-t1 * a_o1*(1-a_o1)* w6 + a_o2-t2 * a_o2*(1-a_o2)  * w8)* a_h2(1-a_h2) * i2
 
-∂E_Total/∂w5 = a_o1-t1 * a_o1*(1-a_o1) * a_h1
-∂E_Total/∂w6 = a_o1-t1 * a_o1*(1-a_o1) * a_h2
-∂E_Total/∂w7 = a_o2-t2 * a_o2*(1-a_o2) * a_h1
-∂E_Total/∂w8 = a_o2-t2 * a_o2*(1-a_o2) * a_h2
+* ∂E_Total/∂w5 = a_o1-t1 * a_o1*(1-a_o1) * a_h1
+* ∂E_Total/∂w6 = a_o1-t1 * a_o1*(1-a_o1) * a_h2
+* ∂E_Total/∂w7 = a_o2-t2 * a_o2*(1-a_o2) * a_h1
+* ∂E_Total/∂w8 = a_o2-t2 * a_o2*(1-a_o2) * a_h2
+
+Calculate all these in the excel columns.
+Keep t1, t2, i1, i2 constant
+
+weights in the next epoc will be decided by learning rate 
+set lr = 1 and see the line chart
+change lr to different values to see the variations in the learning curve.
