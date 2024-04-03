@@ -1,4 +1,4 @@
-# backpropagation
+# Backpropagation Assignment
 ERA assignment 6 backpropagation
 Creates neural network by referring to the classroom Excel. 
 ![image](https://github.com/darshanabhandare/backpropagation/assets/73514918/981d2c27-54f5-44bc-9c25-3a3c34faead5)
@@ -66,9 +66,31 @@ Below is how we derive the effect of each weight on the total error
 * ∂E_Total/∂w7 = a_o2-t2 * a_o2*(1-a_o2) * a_h1
 * ∂E_Total/∂w8 = a_o2-t2 * a_o2*(1-a_o2) * a_h2
 
+
+
 Calculate all these in the excel columns.
 Keep t1, t2, i1, i2 constant
 
 weights in the next epoc will be decided by learning rate 
 set lr = 1 and see the line chart
 change lr to different values to see the variations in the learning curve.
+
+LR = 0.1
+![image](https://github.com/darshanabhandare/backpropagation/assets/73514918/66b8776d-db55-4a5b-a73e-2807b7123764)
+
+LR = 0.2
+0.5![image](https://github.com/darshanabhandare/backpropagation/assets/73514918/f00124c8-6ffc-4c58-8e61-bbb455846535)
+
+LR = 0.5
+![image](https://github.com/darshanabhandare/backpropagation/assets/73514918/a2af76f4-3bb1-4b43-9a7c-b15ed2bb8704)
+
+LR = 0.8
+![image](https://github.com/darshanabhandare/backpropagation/assets/73514918/61be5b2f-c6b6-4258-b770-7ca079e69fe9)
+
+LR = 1.0
+![image](https://github.com/darshanabhandare/backpropagation/assets/73514918/e1259baf-47ce-4284-ba91-25c502343ddb)
+
+LR = 2.0
+![image](https://github.com/darshanabhandare/backpropagation/assets/73514918/7024ce3c-5e51-4624-841b-ab402c8d6c0b)
+
+
